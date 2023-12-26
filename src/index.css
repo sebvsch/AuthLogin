@@ -1,0 +1,10 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color-scheme: light dark;
+  background-color: #fff;
+  color: #242424;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
