@@ -9,6 +9,7 @@ import App from './App.tsx'
 import PrivateRoutes from './routes/PrivateRoutes.tsx'
 
 import './index.css'
+import { Registrar } from './pages/Registrar.tsx'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/  ",
+    element: <Registrar />,
   },
   {
     path: "/",

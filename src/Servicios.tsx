@@ -6,8 +6,7 @@ export interface DataPerfil {
     avatar: string;
 }
 
-export interface Login {
-    email: string;
+export interface LoginEntrar {
     username: string;
     password: string;
 }

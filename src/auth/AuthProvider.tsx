@@ -6,6 +6,7 @@ interface AuthProviderProps {
 
 type AuthType = {
     isAuthenticated: boolean
+    setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const AuthContext = createContext<AuthType>(
@@ -16,10 +17,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-
     return (
         <AuthContext.Provider value={{
-            isAuthenticated
+            isAuthenticated,
+            setIsAuthenticated
         }}>
             {children}
         </AuthContext.Provider>
