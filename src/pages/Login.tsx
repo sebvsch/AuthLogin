@@ -32,24 +32,39 @@ const Login: FC = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <h1>Login</h1>
-                <label>User</label>
-                <input
-                    className="bg-slate-300"
-                    type="text"
-                    value={dataLogin.username}
-                    onChange={(e) => setDataLogin({ ...dataLogin, username: e.target.value })}
-                />
-                <label>Pass</label>
-                <input
-                    className="bg-slate-300"
-                    type="password"
-                    value={dataLogin.password}
-                    onChange={(e) => setDataLogin({ ...dataLogin, password: e.target.value })}
-                />
-
-                <button type='submit'>Entrar</button>
+            <form onSubmit={handleSubmit} className='flex justify-center'>
+                <div className='border w-1/6 space-y-4 text-center p-6 rounded-2xl border-zinc-700'>
+                    <h1 className='text-2xl text-zinc-400 font-bold'>Login</h1>
+                    <div>
+                        <div>
+                            <label className='font-semibold text-zinc-400'>Username:</label>
+                        </div>
+                        <div>
+                            <input
+                                className="py-1 px-2 rounded-lg border bg-[#333333] border-zinc-600"
+                                type="text"
+                                value={dataLogin.username}
+                                onChange={(e) => setDataLogin({ ...dataLogin, username: e.target.value })}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label className='font-semibold text-zinc-400'>Contraseña:</label>
+                        </div>
+                        <div>
+                            <input
+                                className="py-1 px-2 rounded-lg border bg-[#333333] border-zinc-600"
+                                type="password"
+                                value={dataLogin.password}
+                                onChange={(e) => setDataLogin({ ...dataLogin, password: e.target.value })}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <button className='px-4 py-2 rounded-lg bg-blue-900 font-semibold' type='submit'>Inciar Sesión</button>
+                    </div>
+                </div>
             </form>
         </>
     )
