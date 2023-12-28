@@ -4,5 +4,5 @@ import { useAuth } from "../auth/AuthProvider";
 export default function PrivateRoutes() {
     const auth = useAuth()
 
-    return auth.isAuthenticated ? <Outlet /> : <Navigate to="/" />
+    return auth.Authentication ? <Outlet /> : <Navigate to="/" />
 }

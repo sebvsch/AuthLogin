@@ -1,7 +1,7 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
-  background-color: #181818;
+  background-color: #0a0a0a;
 }
 
 @tailwind base;

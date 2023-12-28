@@ -1,31 +1,20 @@
-import { FC, useState } from 'react'
-import { LoginEntrar } from '../Servicios';
-import { pb } from '../pb';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { FC } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 
 const Login: FC = () => {
-    const [dataLogin, setDataLogin] = useState<LoginEntrar>({
-        username: "",
-        password: ""
-    });
 
     const auth = useAuth();
-
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            await pb.collection('users').authWithPassword(
-                dataLogin.username,
-                dataLogin.password
-            );
-            auth.setIsAuthenticated(true)
+            await auth.loginRequest()
             navigate("/dashboard")
         }
-        catch (e) {
-            alert(e)
+        catch (e: any) {
+            alert(e.message)
         }
     };
 
@@ -43,8 +32,8 @@ const Login: FC = () => {
                             <input
                                 className="py-1 px-2 rounded-lg border bg-[#333333] border-zinc-600"
                                 type="text"
-                                value={dataLogin.username}
-                                onChange={(e) => setDataLogin({ ...dataLogin, username: e.target.value })}
+                                value={auth.userLogin.username}
+                                onChange={(e) => auth.setUserLogin({ ...auth.userLogin, username: e.target.value })}
                             />
                         </div>
                     </div>
@@ -56,8 +45,8 @@ const Login: FC = () => {
                             <input
                                 className="py-1 px-2 rounded-lg border bg-[#333333] border-zinc-600"
                                 type="password"
-                                value={dataLogin.password}
-                                onChange={(e) => setDataLogin({ ...dataLogin, password: e.target.value })}
+                                value={auth.userLogin.password}
+                                onChange={(e) => auth.setUserLogin({ ...auth.userLogin, password: e.target.value })}
                             />
                         </div>
                     </div>
