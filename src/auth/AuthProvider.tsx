@@ -13,7 +13,7 @@ type AuthType = {
     registerUserData: RegisterUser;
     setRegisterUserData: React.Dispatch<React.SetStateAction<RegisterUser>>;
     loginRequest: () => Promise<void>;
-    registerRequest: () => Promise<void>;
+    registerRequest: () => Promise<void>
     logoutRequest: () => Promise<void>;
 }
 
@@ -46,7 +46,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     };
 
     const registerRequest = async () => {
-        await pb.collection('users').create(registerUserData);
+        const data = {
+            "name": registerUserData.name,
+            "username": registerUserData.username,
+            "email": registerUserData.email,
+            "password": registerUserData.password,
+            "passwordConfirm": registerUserData.confirmPassword
+        };
+        await pb.collection('users').create(data);
     }
 
     const logoutRequest = async () => {
