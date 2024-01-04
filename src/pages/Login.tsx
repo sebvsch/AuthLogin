@@ -13,7 +13,7 @@ const Login: FC = () => {
             window.location.reload()
         }
         catch (e: any) {
-            alert(e.message)
+            alert(e)
         }
     };
 
@@ -21,7 +21,6 @@ const Login: FC = () => {
     return (
         <>
             <div className="h-screen flex flex-col justify-center items-center">
-
                 <form onSubmit={handleSubmit} className='w-1/4 space-y-5 text-center p-6 rounded-2xl border-zinc-700' style={{ boxShadow: '0px 0px 11px 0px rgba(0,0,0,0.1)' }}>
                     <h1 className='text-4xl text-zinc-700 font-bold'>Entrar</h1>
                     <div>
@@ -57,6 +56,8 @@ const Login: FC = () => {
                     </div>
                     <div>
                         <button className='px-4 py-2 rounded-lg bg-indigo-700 font-semibold' type='submit'>Inciar Sesión</button>
+                    </div>
+                    <div>
                     </div>
                 </form>
             </div>

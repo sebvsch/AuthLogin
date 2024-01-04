@@ -5,6 +5,8 @@ import { Dashboard } from './pages/Dashboard'
 import { Login } from './pages/Login'
 import PrivateRoutesAfterAuth from './routes/PrivateRoutesAfterAuth'
 import { Registrar } from './pages/Registrar'
+import { PerfilUsuario } from './pages/PerfilUsuario'
+import PrivateLayout from './layout/PrivateLayout'
 
 function App() {
     return (
@@ -13,7 +15,10 @@ function App() {
                 <BrowserRouter>
                     <Routes >
                         <Route element={<PrivateRoutes />}>
-                            <Route path='/dashboard' element={<Dashboard />} />
+                            <Route element={<PrivateLayout />}>
+                                <Route path='/dashboard' element={<Dashboard />} />
+                                <Route path='/perfil' element={<PerfilUsuario />} />
+                            </Route>
                         </Route>
                         <Route element={<PrivateRoutesAfterAuth />}>
                             <Route path='/login' element={<Login />} />

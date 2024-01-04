@@ -1,6 +1,6 @@
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { pb } from "../pb";
-import { LoginEntrar, RegisterUser } from "../Servicios";
+import { DataUser, LoginEntrar, RegisterUser } from "../Servicios";
 
 interface AuthProviderProps {
     children: ReactNode;
@@ -15,6 +15,9 @@ type AuthType = {
     loginRequest: () => Promise<void>;
     registerRequest: () => Promise<void>
     logoutRequest: () => Promise<void>;
+    getUserData: () => Promise<void>;
+    userData: DataUser | null;
+    setUserData: React.Dispatch<React.SetStateAction<DataUser | null>>;
 }
 
 export const AuthContext = createContext<AuthType>(
@@ -24,6 +27,9 @@ export const AuthContext = createContext<AuthType>(
 export function AuthProvider({ children }: AuthProviderProps) {
 
     const Authentication = pb.authStore.isValid
+
+    const userID = pb.authStore.model?.id
+    const userToken = pb.authStore.token
 
     const [userLogin, setUserLogin] = useState<LoginEntrar>({
         username: "",
@@ -37,6 +43,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         password: "",
         confirmPassword: ""
     })
+
+    const [userData, setUserData] = useState<DataUser | null>(null);
+
 
     const loginRequest = async () => {
         await pb.collection('users').authWithPassword(
@@ -61,6 +70,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
         window.location.reload()
     }
 
+    const getUserData = async () => {
+        try {
+            if (pb.authStore.model != null) {
+                const authData = await pb.collection('users').getOne(userID)
+                const userData: DataUser = {
+                    id: authData.id,
+                    username: authData.username,
+                    email: authData.email,
+                    name: authData.name,
+                    avatar: `http://127.0.0.1:8090/api/files/_pb_users_auth_/${userID}/${authData.avatar}?${userToken}=`
+                }
+                setUserData(userData);
+            }
+        } catch (err) {
+            setUserData(null);
+        }
+    }
+
+    useEffect(() => {
+        getUserData()
+    }, [])
+
 
     return (
         <AuthContext.Provider value={{
@@ -71,7 +102,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
             setRegisterUserData,
             loginRequest,
             registerRequest,
-            logoutRequest
+            logoutRequest,
+            getUserData,
+            userData,
+            setUserData,
         }}>
             {children}
         </AuthContext.Provider>

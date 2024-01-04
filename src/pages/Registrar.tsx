@@ -28,8 +28,8 @@ const Registrar: FC = () => {
 
     return (
         <>
-            <form onSubmit={handleRegister} className='flex justify-center'>
-                <div className=' w-1/6 space-y-4 text-center p-6 rounded-2xl border-zinc-700' style={{ boxShadow: '0px 0px 11px 0px rgba(0,0,0,0.1)' }}>
+            <div className="h-screen flex flex-col justify-center items-center">
+                <form onSubmit={handleRegister} className='w-1/4 space-y-5 text-center p-6 rounded-2xl border-zinc-700' style={{ boxShadow: '0px 0px 11px 0px rgba(0,0,0,0.1)' }}>
                     <h1 className='text-2xl text-zinc-700 font-bold'>Registrarse</h1>
                     <div>
                         <div>
@@ -37,7 +37,7 @@ const Registrar: FC = () => {
                         </div>
                         <div>
                             <input
-                                className="py-1 px-2 rounded-lg border bg-[#00000018] text-zinc-700 font-semibold"
+                                className="py-1 px-2 rounded-lg border bg-[#00000018] text-zinc-700 font-semibold w-3/4"
                                 type="text"
                                 placeholder="Nombre completo"
                                 value={auth.registerUserData.name}
@@ -51,7 +51,7 @@ const Registrar: FC = () => {
                         </div>
                         <div>
                             <input
-                                className="py-1 px-2 rounded-lg border bg-[#00000018] text-zinc-700 font-semibold"
+                                className="py-1 px-2 rounded-lg border bg-[#00000018] text-zinc-700 font-semibold w-3/4"
                                 type="text"
                                 placeholder="Usuario"
                                 value={auth.registerUserData.username}
@@ -65,7 +65,7 @@ const Registrar: FC = () => {
                         </div>
                         <div>
                             <input
-                                className="py-1 px-2 rounded-lg border bg-[#00000018] text-zinc-700 font-semibold"
+                                className="py-1 px-2 rounded-lg border bg-[#00000018] text-zinc-700 font-semibold w-3/4"
                                 type="text"
                                 placeholder="Correo electronico"
                                 value={auth.registerUserData.email}
@@ -79,7 +79,7 @@ const Registrar: FC = () => {
                         </div>
                         <div>
                             <input
-                                className="py-1 px-2 rounded-lg border bg-[#00000018] text-zinc-700 font-semibold"
+                                className="py-1 px-2 rounded-lg border bg-[#00000018] text-zinc-700 font-semibold w-3/4"
                                 type="password"
                                 placeholder="Contraseña"
                                 value={auth.registerUserData.password}
@@ -93,7 +93,7 @@ const Registrar: FC = () => {
                         </div>
                         <div>
                             <input
-                                className="py-1 px-2 rounded-lg border bg-[#00000018] text-zinc-700 font-semibold"
+                                className="py-1 px-2 rounded-lg border bg-[#00000018] text-zinc-700 font-semibold w-3/4"
                                 type="password"
                                 placeholder="Confirmar contraseña"
                                 value={auth.registerUserData.confirmPassword}
@@ -107,8 +107,8 @@ const Registrar: FC = () => {
                     <div>
                         <button className='px-4 py-2 rounded-lg bg-indigo-700 font-semibold' type='submit'>Registrase</button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </>
     )
 }
