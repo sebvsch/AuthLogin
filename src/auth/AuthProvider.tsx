@@ -18,6 +18,8 @@ type AuthType = {
     getUserData: () => Promise<void>;
     userData: DataUser | null;
     setUserData: React.Dispatch<React.SetStateAction<DataUser | null>>;
+    userToken: string;
+    userID: any
 }
 
 export const AuthContext = createContext<AuthType>(
@@ -41,11 +43,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         username: "",
         email: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
     })
 
     const [userData, setUserData] = useState<DataUser | null>(null);
-
 
     const loginRequest = async () => {
         await pb.collection('users').authWithPassword(
@@ -79,7 +80,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
                     username: authData.username,
                     email: authData.email,
                     name: authData.name,
-                    avatar: `http://127.0.0.1:8090/api/files/_pb_users_auth_/${userID}/${authData.avatar}?${userToken}=`
+                    avatar: `http://127.0.0.1:8090/api/files/_pb_users_auth_/${userID}/${authData.avatar}?${userToken}=`,
+                    created: authData.created,
+                    verified: authData.expand?.verified
                 }
                 setUserData(userData);
             }
@@ -106,6 +109,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
             getUserData,
             userData,
             setUserData,
+            userToken,
+            userID,
         }}>
             {children}
         </AuthContext.Provider>

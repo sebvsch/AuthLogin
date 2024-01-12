@@ -30,7 +30,7 @@ const Registrar: FC = () => {
         <>
             <div className="h-screen flex flex-col justify-center items-center">
                 <form onSubmit={handleRegister} className='w-1/4 space-y-5 text-center p-6 rounded-2xl border-zinc-700' style={{ boxShadow: '0px 0px 11px 0px rgba(0,0,0,0.1)' }}>
-                    <h1 className='text-2xl text-zinc-700 font-bold'>Registrarse</h1>
+                    <h1 className='text-2xl font-bold from-gray-400 via-gray-700 to-gray-950 bg-gradient-to-r bg-clip-text text-transparent'>Registrarse</h1>
                     <div>
                         <div>
                             <label className='font-semibold text-zinc-700'>Nombre Completo:</label>
@@ -105,7 +105,7 @@ const Registrar: FC = () => {
                         <Link to="/login" className='text-blue-400 text-sm underline'>¿Ya estas registrado?</Link>
                     </div>
                     <div>
-                        <button className='px-4 py-2 rounded-lg bg-indigo-700 font-semibold' type='submit'>Registrase</button>
+                        <button className='px-4 py-2 rounded-lg bg-gradient-to-r from-gray-600 via-gray-700 bg-gray-900 font-semibold' type='submit'>Registrase</button>
                     </div>
                 </form>
             </div>

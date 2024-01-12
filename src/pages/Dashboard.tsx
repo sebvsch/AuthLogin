@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { Card } from "../components/Card";
 
+
+
 const Dashboard: FC = () => {
-
-
 
     return (
         <>

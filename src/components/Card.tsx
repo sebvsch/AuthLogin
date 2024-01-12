@@ -1,5 +1,3 @@
-import React from 'react'
-
 type CardProps = {
     titulo: string
     precio?: number
@@ -10,7 +8,7 @@ type CardProps = {
 const Card = ({ titulo, nVentas, bgColor, precio }: CardProps) => {
     return (
         <>
-            <div className={`w-64 h-44 rounded-3xl ${bgColor}`} style={{ boxShadow: '9px 9px 5px -7px rgba(0,0,0,0.1)' }}>
+            <div className={`w-64 h-44 rounded-3xl ${bgColor}`} style={{ boxShadow: '0px 0px 11px 0px rgba(0,0,0,0.1)' }}>
                 <div>
                     <div className='text-2xl font-bold flex justify-center pt-2'>
                         {titulo}

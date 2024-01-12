@@ -1,9 +1,11 @@
 export interface DataUser {
-    id: string;
+    created: string;
+    verified: boolean
+    id: string
     username: string;
     email: string;
     name: string;
-    avatar: string;
+    avatar?: string;
 }
 export interface LoginEntrar {
     username: string;

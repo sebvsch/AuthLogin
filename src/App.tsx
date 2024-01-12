@@ -7,6 +7,7 @@ import PrivateRoutesAfterAuth from './routes/PrivateRoutesAfterAuth'
 import { Registrar } from './pages/Registrar'
 import { PerfilUsuario } from './pages/PerfilUsuario'
 import PrivateLayout from './layout/PrivateLayout'
+import { Usuarios } from './pages/Usuarios'
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                             <Route element={<PrivateLayout />}>
                                 <Route path='/dashboard' element={<Dashboard />} />
                                 <Route path='/perfil' element={<PerfilUsuario />} />
+                                <Route path='/usuarios' element={<Usuarios />} />
                             </Route>
                         </Route>
                         <Route element={<PrivateRoutesAfterAuth />}>
