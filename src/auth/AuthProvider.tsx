@@ -19,7 +19,9 @@ type AuthType = {
     userData: DataUser | null;
     setUserData: React.Dispatch<React.SetStateAction<DataUser | null>>;
     userToken: string;
-    userID: any
+    userID: any;
+    usuarios: Array<DataUser>
+    setUsuarios: React.Dispatch<React.SetStateAction<Array<DataUser>>>
 }
 
 export const AuthContext = createContext<AuthType>(
@@ -32,6 +34,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     const userID = pb.authStore.model?.id
     const userToken = pb.authStore.token
+
+    const [usuarios, setUsuarios] = useState<Array<DataUser>>([])
 
     const [userLogin, setUserLogin] = useState<LoginEntrar>({
         username: "",
@@ -55,15 +59,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
         )
     };
 
+    const verificationRequest = async (email: string) => {
+        await pb.collection('users').requestVerification(email)
+    }
+
     const registerRequest = async () => {
         const data = {
-            "name": registerUserData.name,
-            "username": registerUserData.username,
-            "email": registerUserData.email,
-            "password": registerUserData.password,
-            "passwordConfirm": registerUserData.confirmPassword
+            name: registerUserData.name,
+            username: registerUserData.username,
+            email: registerUserData.email,
+            password: registerUserData.password,
+            passwordConfirm: registerUserData.confirmPassword
         };
-        await pb.collection('users').create(data);
+        try {
+            await pb.collection('users').create(data);
+            try {
+                verificationRequest(data.email)
+            } catch (e) {
+                alert("Erro no envio de verificação por e-mail.")
+            }
+        } catch (e) {
+            alert("Erro no cadastro!");
+        }
     }
 
     const logoutRequest = async () => {
@@ -111,6 +128,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
             setUserData,
             userToken,
             userID,
+            setUsuarios,
+            usuarios
         }}>
             {children}
         </AuthContext.Provider>
