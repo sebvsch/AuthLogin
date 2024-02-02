@@ -1,7 +1,7 @@
 export interface DataUser {
+    id: string
     created: string;
     verified: boolean
-    id: string
     username: string;
     email: string;
     name: string;
