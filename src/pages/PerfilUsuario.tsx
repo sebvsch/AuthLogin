@@ -1,9 +1,12 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
+import { ModalEditarUsuario } from "../components/modals/ModalEditarUsuario";
 
 const PerfilUsuario: FC = () => {
 
     const auth = useAuth()
+
+    const [editarUsuario, setEditarUsuario] = useState(false)
 
     return (
         <>
@@ -16,7 +19,6 @@ const PerfilUsuario: FC = () => {
                         <div className="text-sm  space-y-1 mt-2">
                             <div>
                                 <label className="text-gray-900">Nombre: </label>
-
                                 <span className="text-gray-900 font-semibold">{auth.userData?.name}</span>
                             </div>
                             <div>
@@ -28,11 +30,20 @@ const PerfilUsuario: FC = () => {
                                 <span className="text-gray-900 font-semibold">{auth.userData?.email}</span>
                             </div>
                             <div>
-                                <button className="bg-gradient-to-tr from-slate-500 via-slate-600 to-slate-700 py-1 px-4 rounded-md text-white font-medium">Editar datos</button>
+                                <button onClick={() => setEditarUsuario(true)} className="bg-gradient-to-tr from-slate-500 via-slate-600 to-slate-700 py-1 px-4 rounded-md text-white font-medium">
+                                    <span>
+                                        Editar datos
+                                    </span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+                {
+                    editarUsuario && (
+                        <ModalEditarUsuario />
+                    )
+                }
             </div>
         </>
     )

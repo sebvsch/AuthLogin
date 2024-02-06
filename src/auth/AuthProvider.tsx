@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { pb } from "../pb";
-import { DataUser, LoginEntrar, RegisterUser } from "../Servicios";
+import { DataUser, LoginEntrar, RegisterUser } from "../interfaces/General";
 
 interface AuthProviderProps {
     children: ReactNode;
@@ -20,8 +20,9 @@ type AuthType = {
     setUserData: React.Dispatch<React.SetStateAction<DataUser | null>>;
     userToken: string;
     userID: any;
-    usuarios: Array<DataUser>
-    setUsuarios: React.Dispatch<React.SetStateAction<Array<DataUser>>>
+    usuarios: Array<DataUser>;
+    setUsuarios: React.Dispatch<React.SetStateAction<Array<DataUser>>>;
+    eliminarUsuario: (id: number) => Promise<void>
 }
 
 export const AuthContext = createContext<AuthType>(
@@ -76,10 +77,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
             try {
                 verificationRequest(data.email)
             } catch (e) {
-                alert("Erro no envio de verificação por e-mail.")
+                alert("Error al verificar")
             }
         } catch (e) {
-            alert("Erro no cadastro!");
+            alert(e);
         }
     }
 
@@ -87,6 +88,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
         pb.authStore.clear()
         window.location.reload()
     }
+
+    const eliminarUsuario = async (index: number) => {
+        const usuarioEliminar = usuarios[index];
+        await pb.collection('users').delete(usuarioEliminar.id);
+        const nuevosUsuarios = [...usuarios];
+        nuevosUsuarios.splice(index, 1);
+        setUsuarios(nuevosUsuarios);
+    };
+
 
     const getUserData = async () => {
         try {
@@ -129,7 +139,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
             userToken,
             userID,
             setUsuarios,
-            usuarios
+            usuarios,
+            eliminarUsuario
         }}>
             {children}
         </AuthContext.Provider>

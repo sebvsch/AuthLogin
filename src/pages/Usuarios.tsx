@@ -1,6 +1,6 @@
 import { FC, useContext, useEffect } from 'react'
 import { pb } from '../pb'
-import { DataUser } from '../Servicios'
+import { DataUser } from '../interfaces/General'
 import { DropdownAction } from '../components/DropdownAction'
 import { AuthContext } from '../auth/AuthProvider'
 
@@ -10,13 +10,12 @@ const Usuarios: FC = () => {
 
     const consultarListaUsuarios = async () => {
         try {
-            const respuesta = await pb.collection('users').getFullList<DataUser>(undefined, { sort: '-created' });
+            const respuesta = await pb.collection('users').getFullList<DataUser>();
             setUsuarios(respuesta);
         } catch (error) {
             console.error('Error al consultar usuarios:', error);
         }
     }
-
 
     useEffect(() => {
         pb.collection('users').subscribe<DataUser>('*', (e) => {
@@ -43,10 +42,10 @@ const Usuarios: FC = () => {
 
     return (
         <>
-            <div className='border'>
+            <div className=''>
                 <div className="">
-                    <h1 className="text-gray-900 text-lg font-bold mb-4">Usuarios</h1>
-                    <div className="overflow-x-auto">
+                    <h1 className="text-gray-900 text-lg font-bold p-4">Listado Usuarios</h1>
+                    <div className="overflow-x-auto h-screen">
                         <table className="min-w-full">
                             <thead className='text-gray-400 text-xs'>
                                 <tr>
@@ -72,7 +71,7 @@ const Usuarios: FC = () => {
                                                 </span>
                                             </td>
                                             <td className="py-2 px-4">
-                                                <DropdownAction />
+                                                <DropdownAction id={usuario.id} />
                                             </td>
                                         </tr>
                                     ))
